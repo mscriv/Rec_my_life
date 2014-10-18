@@ -4,7 +4,7 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = Event.all
+    @category = Category.find(params[:category_name])
   end
 
   # GET /events/1
@@ -14,7 +14,8 @@ class EventsController < ApplicationController
 
   # GET /events/new
   def new
-    @event = Event.new
+    @category = Category.find(params[:category_name])
+    @event = @category.events.new
   end
 
   # GET /events/1/edit
@@ -24,16 +25,14 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
-    @event = Event.new(event_params)
-
-    respond_to do |format|
+    @category = Category.find(params[:category_name])
+    @event = @category.events.new(event_params)
       if @event.save
-        format.html { redirect_to @event, notice: 'Event was successfully created.' }
-        format.json { render :show, status: :created, location: @event }
+        flash[:success] = "Added new event."
+        redirect_to category_events_path
       else
-        format.html { render :new }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
-      end
+        flash[:error] = "There was a problem adding that event."
+        render action: :new
     end
   end
 
