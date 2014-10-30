@@ -1,0 +1,53 @@
+        <h3>Enter your location to search for activities</h3>
+
+        <div class= "field">
+            <%= f.label :location %>
+            <%= f.text_field :location %>
+        </div>
+
+
+
+        <form action="category_events">
+          <select name="category">
+            <option value="music">Music</option>
+            <option value="family">Family</option>
+            <option value="pet_friendly">Pet Friendly</option>
+            <option value="adults">Adults</option>
+          </select>
+
+            <input name="category_type" type="text">
+            <input type="submit" value="Submit">
+        </form>
+
+
+        <h1>Music</h1>
+
+         <% if params[:category] == 'music' %>
+
+              <% titles.each_with_index do |title, idx| %>
+              <%="#{title} => #{start_times[idx]}, #{venue_names[idx]}, #{venue_adresses[idx]}, #{links[idx]}\n" %>
+        <% end %>
+
+        <h1>Family</h1>
+
+         <% if params[:category] == 'family' %>
+
+              <% titles.each_with_index do |title, idx| %>
+              <%="#{title} => #{start_times[idx]}, #{venue_names[idx]}, #{venue_adresses[idx]}, #{links[idx]}\n" %>
+        <% end %>
+
+        <h1>Pet Friendly</h1>
+
+         <% if params[:category] == 'pet_friendly' %>
+
+              <% titles.each_with_index do |title, idx| %>
+              <%="#{title} => #{start_times[idx]}, #{venue_names[idx]}, #{venue_adresses[idx]}, #{links[idx]}\n" %>
+         <% end %>
+
+        <h1>Adults</h1>
+
+              <% if params[:category] == 'Adults' %>
+
+              <% titles.each_with_index do |title, idx| %>
+              <%="#{title} => #{start_times[idx]}, #{venue_names[idx]}, #{venue_adresses[idx]}, #{links[idx]}\n" %>
+        <% end %>
